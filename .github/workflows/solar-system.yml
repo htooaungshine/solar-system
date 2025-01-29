@@ -85,9 +85,9 @@ jobs:
         #   with:
         #     image: ${{ secrets.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
         #     name: solarsystem-app
-      - name: Docker Image testing
-        run: |
-          docker run -d -p 3000:3000 -e DB_URL=$DB_URL ${{ secrets.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
+        - name: Docker Image testing
+          run: |
+            docker run -d -p 3000:3000 -e DB_URL=$DB_URL ${{ secrets.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
 
-          echo Testing image testing
-          wget -q -O - http://localhost:3000/live | grep live
+            echo Testing image testing
+            wget -q -O - http://localhost:3000/live | grep live
