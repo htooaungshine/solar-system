@@ -58,4 +58,5 @@ jobs:
           uses: actions/upload-artifact@v3
           with:
             name: Code-Coverage-Result
+            path: coverage
 
