@@ -30,7 +30,7 @@ jobs:
           run: npm test
           
         - name: Archive Test Result
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           with:
             name: Mocha-Test-Result
             path: test-results.xml
@@ -55,7 +55,7 @@ jobs:
           run: npm run coverage
 
         - name: Archive Code Coverage
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           with:
             name: Code-Coverage-Result
             path: coverage
@@ -90,4 +90,5 @@ jobs:
             docker run -d -p 3000:3000 -e DB_URL=$DB_URL ${{ secrets.DOCKER_USERNAME }}/solar-system:${{ github.sha }}
 
             echo Testing image testing
+
             wget -q -O - http://localhost:3000/live | grep live
