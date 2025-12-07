@@ -60,7 +60,7 @@ jobs:
             name: Code-Coverage-Result
             path: coverage
     
-    docker-build:
+    docker:
         name: Docker Build
         needs: [unit-testing, code-coverage]
         runs-on: ubuntu-latest
@@ -93,3 +93,20 @@ jobs:
             echo Testing image testing
 
             wget -q -O - http://localhost:3000/live | grep live
+    
+    deploy-dev:
+      needs: docker
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repo
+          uses: actions/checkout@v4
+
+        - name: Install kubectl
+          uses: azure/setup-kubectl@v4
+
+        - name: Fetch K8s Cluster Info
+          run: |
+            kubectl version --short
+            echo ------------------
+            kubectl get nodes
+          
